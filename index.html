@@ -5,7 +5,7 @@
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu">
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
 	<style>
-		* {
+		*:not(.buttonsleft, .buttons, .buttonsright) {
 			cursor: default;
 		}
 		body, html {
@@ -108,6 +108,7 @@
 			text-align: center;
 			color: white;
 			box-shadow: 0 0 200px rgba(0,0,0,0.9) inherit;
+			cursor: pointer;
 		}
 		.buttonsleft:hover {
 			transition: 0.25s;
@@ -132,6 +133,7 @@
 			text-align: center;
 			color: white;
 			box-shadow: 0 0 200px rgba(0,0,0,0.9) inherit;
+			cursor: pointer;
 		}
 		.buttons:hover {
 			transition: 0.25s;
@@ -157,6 +159,7 @@
 			text-align: center;
 			color: white;
 			box-shadow: 0 0 200px rgba(0,0,0,0.9) inherit;
+			cursor: pointer;
 		}
 		.buttonsright:hover {
 			transition: 0.25s;
@@ -398,8 +401,18 @@
 		</div>
 	</div>
 	</div>
+
+	<script>
+
+		// Define button clicks
+		function animationButton() {
+			window.open("https://youtube.com/@Lynxdeer", "_blank");
+		}	
+
+	</script>
+
 	<div class="buttoncontainer">
-		<div class="buttonsleft">
+		<div class="buttonsleft" onclick="animationButton();">
 			<span class="material-symbols-outlined">manga</span>
 			<h3>Animation</h3>
 		</div>
