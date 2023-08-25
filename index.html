@@ -10,6 +10,9 @@
 		*:not(.buttonsleft, .buttons, .buttonsright, h3, span) {
 			cursor: default;
 		}
+		* {
+			font-family: "Ubuntu", Roboto, sans-serif;
+		}
 		body, html {
 			height: 100%;
 			margin:0;
@@ -42,6 +45,11 @@
 			background-position-y: 0%;
 			background-repeat: no-repeat;
 			box-shadow: 0 0 10vw rgba(0,0,0,0.9) inset;
+			animation: scroll 200s linear infinite;
+		}
+		@keyframes scroll {
+			0% { background-position-y: 0%; }
+			100% { background-position-y: 100%; }
 		}
 		.coolhexagoncontainer {
 			box-shadow: 0 0 10vw rgba(120, 240, 206, 0.1) inset;
@@ -50,7 +58,6 @@
 			background-color: #1E1E1E;
 			bottom:7.75%;
 			color: white;
-			font-family: "Ubuntu", Roboto, sans-serif;
 		}
 		.container {
 			position: relative;
@@ -103,36 +110,16 @@
 			
 		}
 
-		.buttonsleft {
-			transition: 0.5s;
-			font-family: "Ubuntu", Roboto, sans-serif;
-			position: absolute;
-			right: 72%;
-			bottom: 10%;
-			border-radius: 20%;
-			height: 5vw;
-			width: 5vw;
-			border: 0.1vw double #222;
-			padding: 1vw;
-			z-index: 10;
-			background: #1D1D1D;
-			text-align: center;
-			color: white;
-			box-shadow: 0 0 200px rgba(0,0,0,0.9) inherit;
-			cursor: pointer;
-		}
-		.buttonsleft:hover {
-			transition: 0.25s;
-			right: 71.9%;
-			bottom: 11%;
-			border: 0.2vw solid #8cfaeb;
-		}
-
+		.leftbutton {right: 71.9%;}
+		.middlebutton {right: 45.9%;}
+		.rightbutton {right: 21.9%;}
+		.leftbutton:hover {right: 72%;}
+		.middlebutton:hover {right: 46%;}
+		.rightbutton:hover {right: 22%;}
 		.buttons {
 			transition: 0.5s;
 			font-family: "Ubuntu", Roboto, sans-serif;
 			position: absolute;
-			right: 46%;
 			bottom: 10%;
 			border-radius: 20%;
 			height: 5vw;
@@ -148,33 +135,6 @@
 		}
 		.buttons:hover {
 			transition: 0.25s;
-			right: 45.9%;
-			bottom: 11%;
-			border: 0.2vw solid #8cfaeb;
-		}
-
-
-		.buttonsright {
-			transition: 0.5s;
-			font-family: "Ubuntu", Roboto, sans-serif;
-			position: absolute;
-			right: 22%;
-			bottom: 10%;
-			border-radius: 20%;
-			height: 5vw;
-			width: 5vw;
-			border: 0.1vw double #222;
-			padding: 1vw;
-			z-index: 10;
-			background: #1D1D1D;
-			text-align: center;
-			color: white;
-			box-shadow: 0 0 200px rgba(0,0,0,0.9) inherit;
-			cursor: pointer;
-		}
-		.buttonsright:hover {
-			transition: 0.25s;
-			right: 21.9%;
 			bottom: 11%;
 			border: 0.2vw solid #8cfaeb;
 		}
@@ -192,11 +152,34 @@
 			color: white;
 			text-align: center;
 			box-shadow: 0 0 200px rgba(0,0,0,0.9) inherit;
-			animation: fadeIn 1s infinite;
+			animation: fadeIn 0.25s;
+		}
+		.closebutton {
+			position: absolute;
+			float: right;
 		}
 		@keyframes fadeIn {
-			0% { opacity 0; }
-			100% { opacity 1; }
+			0% { 
+				opacity: 0; 
+				width: 0%; 
+				height: 0%;
+				height: 100%;
+				
+				top: 50%;
+				bottom: 100%;
+				left: 50%;
+				right: 50%;
+			}
+			100% { 
+				opacity: 1; 
+				width: 50%; 
+				height: 100%;
+				
+				top: 25%;
+				bottom: 50%;
+				left: 25%;
+				right: 25%;
+			}
 		}
 		
 	</style>
@@ -458,29 +441,39 @@
 
 	<script>
 
+		var hasPopupOpen = false;
+
 		// Define button clicks
 		function animationButton() {
 			//window.open("https://youtube.com/@Lynxdeer", "_blank");
 		}
 		
 		function webGamesButton() {
+			if (hasPopupOpen) return;
 			//window.open("https://sonofharri.github.io/SoftDrinkSkirmish", "_blank");
 			const popup = document.body.appendChild(document.createElement("div"));
 			popup.className = "popup";
+
+			const popupHeader = popup.appendChild(document.createElement("h3"));
+			popupHeader.innerHTML = "Web Games";
+
+			const closeButton = popup.appendChild(document.createElement("span"));
+			closeButton.className = "closebutton material-symbols-outlined";
+			closeButton.innerHTML = "close";
 		}
 
 	</script>
 
 	<div class="buttoncontainer">
-		<div class="buttonsleft" onclick="animationButton();">
+		<div class="buttons leftbutton" onclick="animationButton();">
 			<span class="material-symbols-outlined">deployed_code</span>
 			<h3>Animation</h3>
 		</div>
-		<div class="buttons" onclick="webGamesButton();">
+		<div class="buttons middlebutton" onclick="webGamesButton();">
 			<span class="material-symbols-outlined">stadia_controller</span>
 			<h3>Web Games</h3>
 		</div>
-		<div class="buttonsright">
+		<div class="buttons rightbutton">
 			<span class="material-symbols-outlined">call</span>
 			<h3>Contact me!</h3>
 		</div>
@@ -503,14 +496,14 @@
 		var topbox = document.getElementById("topbox");
 		//topbox.style.backgroundPositionY = 10 + "%";
 
-		var interval = setInterval(function() {
+		/*var interval = setInterval(function() {
 			amount+=0.01;
 			if (heat) amount = 200;
 			topbox.style.backgroundPositionY = amount + "%";
 			if (amount > 100) {
 				amount = 0;
 			}
-		}, 20);
+		}, 20);*/
 		
 	</script>
 </body>
