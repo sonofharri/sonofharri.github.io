@@ -4,8 +4,10 @@
 	
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu">
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+	<link rel="icon" type="image/x-icon" href="favicon.ico">
+	<title>Hello!</title>
 	<style>
-		*:not(.buttonsleft, .buttons, .buttonsright) {
+		*:not(.buttonsleft, .buttons, .buttonsright, h3, span) {
 			cursor: default;
 		}
 		body, html {
@@ -23,6 +25,7 @@
 		}
 		h3 {
 			font-size: 0.9vw;
+			cursor: pointer;
 		}
 		.topbox {
 			position: relative;
@@ -34,7 +37,7 @@
 			bottom:40%;
 			padding: 2% 0%;
 			font-family: "Ubuntu", Roboto, sans-serif;
-			background-image: url(code.png);
+			background-image: url(code.svg);
 			background-size: 100%;
 			background-position-y: 0%;
 			background-repeat: no-repeat;
@@ -49,10 +52,11 @@
 			color: white;
 			font-family: "Ubuntu", Roboto, sans-serif;
 		}
-		container{
+		.container {
 			position: relative;
 			overflow: hidden;
-			height: 100vh;
+			padding-top: 2vh;
+			height: 120vh;
 			animation: animate 4s linear infinite;
 		}
 		@keyframes animate{
@@ -87,9 +91,16 @@
 			pointer-events: none;
 			background: rgba(255, 255, 255, 0.02);
 		}
-		.hexagon:hover{
+		.hexagon:hover {
 			transition: 0s;
-			background: #8cfaeb;
+			background: var(--hex-color);
+		}
+		.secrethex {
+			transition: 2s;
+		}
+		.secrethex:hover {
+			background: #000000;
+			
 		}
 
 		.buttonsleft {
@@ -97,7 +108,7 @@
 			font-family: "Ubuntu", Roboto, sans-serif;
 			position: absolute;
 			right: 72%;
-			bottom: 20%;
+			bottom: 10%;
 			border-radius: 20%;
 			height: 5vw;
 			width: 5vw;
@@ -113,7 +124,7 @@
 		.buttonsleft:hover {
 			transition: 0.25s;
 			right: 71.9%;
-			bottom: 21%;
+			bottom: 11%;
 			border: 0.2vw solid #8cfaeb;
 		}
 
@@ -122,7 +133,7 @@
 			font-family: "Ubuntu", Roboto, sans-serif;
 			position: absolute;
 			right: 46%;
-			bottom: 20%;
+			bottom: 10%;
 			border-radius: 20%;
 			height: 5vw;
 			width: 5vw;
@@ -138,7 +149,7 @@
 		.buttons:hover {
 			transition: 0.25s;
 			right: 45.9%;
-			bottom: 21%;
+			bottom: 11%;
 			border: 0.2vw solid #8cfaeb;
 		}
 
@@ -148,7 +159,7 @@
 			font-family: "Ubuntu", Roboto, sans-serif;
 			position: absolute;
 			right: 22%;
-			bottom: 20%;
+			bottom: 10%;
 			border-radius: 20%;
 			height: 5vw;
 			width: 5vw;
@@ -164,8 +175,28 @@
 		.buttonsright:hover {
 			transition: 0.25s;
 			right: 21.9%;
-			bottom: 21%;
+			bottom: 11%;
 			border: 0.2vw solid #8cfaeb;
+		}
+		.popup {
+			position: absolute;
+			z-index: 20;
+			background-color: #1D1D1D;
+			border: 0.5vw solid #222;
+			width: 50%;
+			height: 100%;
+			top: 25%;
+			bottom: 50%;
+			left: 25%;
+			right: 25%;
+			color: white;
+			text-align: center;
+			box-shadow: 0 0 200px rgba(0,0,0,0.9) inherit;
+			animation: fadeIn 1s infinite;
+		}
+		@keyframes fadeIn {
+			0% { opacity 0; }
+			100% { opacity 1; }
 		}
 		
 	</style>
@@ -178,6 +209,29 @@
 		<h2><strong>Programmer</strong></h2>
 	</div>
 	<div id="coolhexagoncontainer" class="coolhexagoncontainer">
+		<script>
+		
+			var heat = false;
+			
+			function heatDeath() {
+				if (heat) return;
+				heat = true;
+				let things = document.getElementsByTagName("*");
+				for (let i = 0; i < things.length; i++) {
+					things[i].style.backgroundColor = "rgb(0, 10, 0)";
+					things[i].style.color = "rgb(0, 100, 0)";
+				}
+				const secret = document.getElementsByClassName("secrethex")[0];
+				secret.style.backgroundColor = "rgb(0, 255, 0)";
+				
+				document.getElementById("topbox").background = 'none';
+				document.getElementsByTagName("h1")[0].innerHTML = "Who?";
+				document.getElementsByTagName("h2")[0].innerHTML = "You found";
+				document.getElementsByTagName("h2")[1].innerHTML = "the secret tile!";
+				
+			}
+			
+		</script>
 		<br>
 		<br>
 		<div class="container">
@@ -198,7 +252,7 @@
 			<div class="hexagon"></div>
 			<div class="hexagon"></div>
 			<div class="hexagon"></div>
-      
+	  
 		</div>
 		<div class="row altline2">
 			<div class="hexagon"></div>
@@ -217,7 +271,7 @@
 			<div class="hexagon"></div>
 			<div class="hexagon"></div>
 			<div class="hexagon"></div>
-      
+	  
 		</div>
 		<div class="row line2">
 			<div class="hexagon"></div>
@@ -293,7 +347,7 @@
 		</div>
 		<div class="row line4">
 			<div class="hexagon"></div>
-			<div class="hexagon"></div>
+			<div class="hexagon secrethex" onmouseover="heatDeath();"></div>
 			<div class="hexagon"></div>
 			<div class="hexagon"></div>
 			<div class="hexagon"></div>
@@ -406,28 +460,42 @@
 
 		// Define button clicks
 		function animationButton() {
-			window.open("https://youtube.com/@Lynxdeer", "_blank");
-		}	
+			//window.open("https://youtube.com/@Lynxdeer", "_blank");
+		}
+		
+		function webGamesButton() {
+			//window.open("https://sonofharri.github.io/SoftDrinkSkirmish", "_blank");
+			const popup = document.body.appendChild(document.createElement("div"));
+			popup.className = "popup";
+		}
 
 	</script>
 
 	<div class="buttoncontainer">
 		<div class="buttonsleft" onclick="animationButton();">
-			<span class="material-symbols-outlined">manga</span>
+			<span class="material-symbols-outlined">deployed_code</span>
 			<h3>Animation</h3>
 		</div>
-		<div class="buttons">
+		<div class="buttons" onclick="webGamesButton();">
 			<span class="material-symbols-outlined">stadia_controller</span>
 			<h3>Web Games</h3>
 		</div>
 		<div class="buttonsright">
-			<span class="material-symbols-outlined">deployed_code</span>
-			<h3>third thing here</h3>
+			<span class="material-symbols-outlined">call</span>
+			<h3>Contact me!</h3>
 		</div>
 	</div>
 	<script>
-		//var elements = document.getElementsByClassName("hexagon");
-		//elements.forEach((e) => e.style.);
+		
+		const elems = document.getElementsByClassName("hexagon");
+		for (let i = 0; i < elems.length; i++) changeCSS(elems[i]);
+		
+		function changeCSS(e) {
+			let random = Math.random() + 0.75;
+			e.style.setProperty('--hex-color', 'rgb(' + 140/random + ',' + 250/random + ',' + 235/random + ')');
+		}
+		
+		
 		
 
 		var amount = 0.1;
@@ -437,6 +505,7 @@
 
 		var interval = setInterval(function() {
 			amount+=0.01;
+			if (heat) amount = 200;
 			topbox.style.backgroundPositionY = amount + "%";
 			if (amount > 100) {
 				amount = 0;
