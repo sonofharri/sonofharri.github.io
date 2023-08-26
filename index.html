@@ -4,7 +4,6 @@
 	
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu">
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
-	<link rel="icon" type="image/x-icon" href="favicon.ico">
 	<title>Hello!</title>
 	<style>
 		*:not(.buttonsleft, .buttons, .buttonsright, h3, span) {
@@ -29,6 +28,9 @@
 		h3 {
 			font-size: 0.9vw;
 			cursor: pointer;
+		}
+		.material-symbols-outlined {
+			font-size: 3vw;
 		}
 		.topbox {
 			position: relative;
@@ -157,6 +159,9 @@
 		.closebutton {
 			position: absolute;
 			float: right;
+			background-color: #1f1f1f;
+			border: 0.2vw solid #222;
+			border-radius: 20%;
 		}
 		@keyframes fadeIn {
 			0% { 
@@ -440,12 +445,24 @@
 	</div>
 
 	<script>
+		
+		
+		
+		const elems = document.getElementsByClassName("hexagon");
+		for (let i = 0; i < elems.length; i++) changeCSS(elems[i]);
+		
+		function changeCSS(e) {
+			let random = Math.random() + 0.75;
+			e.style.setProperty('--hex-color', 'rgb(' + 140/random + ',' + 250/random + ',' + 235/random + ')');
+		}
+		
+		
 
 		var hasPopupOpen = false;
 
 		// Define button clicks
-		function animationButton() {
-			//window.open("https://youtube.com/@Lynxdeer", "_blank");
+		function youtubeButton() {
+			window.open("https://youtube.com/@Lynxdeer", "_blank");
 		}
 		
 		function webGamesButton() {
@@ -460,14 +477,17 @@
 			const closeButton = popup.appendChild(document.createElement("span"));
 			closeButton.className = "closebutton material-symbols-outlined";
 			closeButton.innerHTML = "close";
+			closeButton.onclick = removeElement(popup);
 		}
+		
+		function removeElement(e) {e.remove();}
 
 	</script>
 
 	<div class="buttoncontainer">
-		<div class="buttons leftbutton" onclick="animationButton();">
-			<span class="material-symbols-outlined">deployed_code</span>
-			<h3>Animation</h3>
+		<div class="buttons leftbutton" onclick="aboutMeButton();">
+			<span class="material-symbols-outlined">smart_display</span>
+			<h3>YouTube</h3>
 		</div>
 		<div class="buttons middlebutton" onclick="webGamesButton();">
 			<span class="material-symbols-outlined">stadia_controller</span>
@@ -475,37 +495,10 @@
 		</div>
 		<div class="buttons rightbutton">
 			<span class="material-symbols-outlined">call</span>
-			<h3>Contact me!</h3>
+			<h3>Contact me</h3>
 		</div>
 	</div>
-	<script>
-		
-		const elems = document.getElementsByClassName("hexagon");
-		for (let i = 0; i < elems.length; i++) changeCSS(elems[i]);
-		
-		function changeCSS(e) {
-			let random = Math.random() + 0.75;
-			e.style.setProperty('--hex-color', 'rgb(' + 140/random + ',' + 250/random + ',' + 235/random + ')');
-		}
-		
-		
-		
-
-		var amount = 0.1;
-
-		var topbox = document.getElementById("topbox");
-		//topbox.style.backgroundPositionY = 10 + "%";
-
-		/*var interval = setInterval(function() {
-			amount+=0.01;
-			if (heat) amount = 200;
-			topbox.style.backgroundPositionY = amount + "%";
-			if (amount > 100) {
-				amount = 0;
-			}
-		}, 20);*/
-		
-	</script>
+	
 </body>
 
 </html>
