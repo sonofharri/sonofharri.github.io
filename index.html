@@ -145,30 +145,51 @@
 			z-index: 20;
 			background-color: #1D1D1D;
 			border: 0.5vw solid #222;
-			width: 50%;
-			height: 100%;
-			top: 25%;
-			bottom: 50%;
-			left: 25%;
-			right: 25%;
+			
 			color: white;
 			text-align: center;
 			box-shadow: 0 0 200px rgba(0,0,0,0.9) inherit;
-			animation: fadeIn 0.25s;
+			
+		}
+		.popupbig {
+			width: 60%;
+			height: 100%;
+			top: 25%;
+			bottom: 50%;
+			left: 15%;
+			right: 15%;
+			animation: popup 0.25s;
+		}
+		.popupsmall {
+			width: 20%; 
+			height: 20%;
+			
+			top: 40%;
+			bottom: 60%;
+			left: 40%;
+			right: 60%;
+			animation: popupsmall 0.25s;
 		}
 		.closebutton {
 			position: absolute;
-			float: right;
-			background-color: #1f1f1f;
-			border: 0.2vw solid #222;
-			border-radius: 20%;
+			left: 95%;
+			bottom: 95%;
+			background-color: #222;
+			font-size: 1.5vw;
+			border: 0.15vw solid #1d1d1d;
+			border-radius: 50%;
+			cursor: pointer;
+			transition: 0.1s;
 		}
-		@keyframes fadeIn {
+		.closebutton:hover {
+			background-color: #333;
+			transition: 0.1s;
+		}
+		@keyframes popup {
 			0% { 
 				opacity: 0; 
 				width: 0%; 
 				height: 0%;
-				height: 100%;
 				
 				top: 50%;
 				bottom: 100%;
@@ -177,13 +198,35 @@
 			}
 			100% { 
 				opacity: 1; 
-				width: 50%; 
+				width: 60%; 
 				height: 100%;
 				
 				top: 25%;
 				bottom: 50%;
-				left: 25%;
-				right: 25%;
+				left: 15%;
+				right: 15%;
+			}
+		}
+		@keyframes popupsmall {
+			0% { 
+				opacity: 0; 
+				width: 0%; 
+				height: 0%;
+				
+				top: 50%;
+				bottom: 100%;
+				left: 50%;
+				right: 50%;
+			}
+			100% { 
+				opacity: 1; 
+				width: 20%; 
+				height: 20%;
+				
+				top: 40%;
+				bottom: 60%;
+				left: 40%;
+				right: 40%;
 			}
 		}
 		
@@ -465,19 +508,38 @@
 			window.open("https://youtube.com/@Lynxdeer", "_blank");
 		}
 		
-		function webGamesButton() {
+		function projectsButton() {
 			if (hasPopupOpen) return;
-			//window.open("https://sonofharri.github.io/SoftDrinkSkirmish", "_blank");
 			const popup = document.body.appendChild(document.createElement("div"));
-			popup.className = "popup";
+			popup.className = "popup popupbig";
 
-			const popupHeader = popup.appendChild(document.createElement("h3"));
-			popupHeader.innerHTML = "Web Games";
+			const popupHeader = popup.appendChild(document.createElement("h1"));
+			popupHeader.innerHTML = "Projects";
+			const popupText = popup.appendChild(document.createElement("text"));
+			popupText.innerHTML = "TODO: Finish this page";
 
 			const closeButton = popup.appendChild(document.createElement("span"));
 			closeButton.className = "closebutton material-symbols-outlined";
 			closeButton.innerHTML = "close";
-			closeButton.onclick = removeElement(popup);
+			closeButton.onclick = function() {removeElement(popup)};
+		}
+
+
+		function contactMe() {
+			if (hasPopupOpen) return;
+			const popup = document.body.appendChild(document.createElement("div"));
+			popup.className = "popup popupsmall";
+
+			const popupHeader = popup.appendChild(document.createElement("h1"));
+			popupHeader.innerHTML = "Contact me!";
+
+			const popupText = popup.appendChild(document.createElement("text"));
+			popupText.innerHTML = "Email: 69harrtozz@csdecatur.net";
+
+			const closeButton = popup.appendChild(document.createElement("span"));
+			closeButton.className = "closebutton material-symbols-outlined";
+			closeButton.innerHTML = "close";
+			closeButton.onclick = function() {removeElement(popup)};
 		}
 		
 		function removeElement(e) {e.remove();}
@@ -485,15 +547,15 @@
 	</script>
 
 	<div class="buttoncontainer">
-		<div class="buttons leftbutton" onclick="aboutMeButton();">
+		<div class="buttons leftbutton" onclick="youtubeButton();">
 			<span class="material-symbols-outlined">smart_display</span>
 			<h3>YouTube</h3>
 		</div>
-		<div class="buttons middlebutton" onclick="webGamesButton();">
-			<span class="material-symbols-outlined">stadia_controller</span>
-			<h3>Web Games</h3>
+		<div class="buttons middlebutton" onclick="projectsButton();">
+			<span class="material-symbols-outlined">deployed_code</span>
+			<h3>Projects</h3>
 		</div>
-		<div class="buttons rightbutton">
+		<div class="buttons rightbutton" onclick="contactMe();">
 			<span class="material-symbols-outlined">call</span>
 			<h3>Contact me</h3>
 		</div>
