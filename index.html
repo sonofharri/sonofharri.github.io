@@ -4,9 +4,10 @@
 	
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu">
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
-	<title>Harrison</title>
+	<link rel="icon" type="image/png" href="favicon.png">
+	<title>Harrison Tozzi</title>
 	<style>
-		*:not(.buttonsleft, .buttons, .buttonsright, h3, span) {
+		*:not(.buttonsleft, .buttons, .buttonsright, h3, span, a) {
 			cursor: default;
 		}
 		* {
@@ -156,8 +157,8 @@
 			height: 100%;
 			top: 25%;
 			bottom: 50%;
-			left: 15%;
-			right: 15%;
+			left: 20%;
+			right: 20%;
 			animation: popup 0.25s;
 		}
 		.popupsmall {
@@ -203,8 +204,8 @@
 				
 				top: 25%;
 				bottom: 50%;
-				left: 15%;
-				right: 15%;
+				left: 20%;
+				right: 20%;
 			}
 		}
 		@keyframes popupsmall {
@@ -505,7 +506,20 @@
 
 		// Define button clicks
 		function youtubeButton() {
-			window.open("https://youtube.com/@Lynxdeer", "_blank");
+			//window.open("https://youtube.com/@Lynxdeer", "_blank");\if (hasPopupOpen) return;
+			const popup = document.body.appendChild(document.createElement("div"));
+			popup.className = "popup popupsmall";
+
+			const popupHeader = popup.appendChild(document.createElement("h1"));
+			popupHeader.innerHTML = "This button is disabled!";
+
+			const popupText = popup.appendChild(document.createElement("text"));
+			popupText.innerHTML = "I'm not supposed to put identifiable information on this site, apparently.";
+
+			const closeButton = popup.appendChild(document.createElement("span"));
+			closeButton.className = "closebutton material-symbols-outlined";
+			closeButton.innerHTML = "close";
+			closeButton.onclick = function() {removeElement(popup)};
 		}
 		
 		function projectsButton() {
@@ -516,7 +530,7 @@
 			const popupHeader = popup.appendChild(document.createElement("h1"));
 			popupHeader.innerHTML = "Projects";
 			const popupText = popup.appendChild(document.createElement("text"));
-			popupText.innerHTML = "TODO: Finish this page";
+			popupText.innerHTML = "<strong><u>Web Projects</u></strong><br><br>This website!<br><a href='https://sonofharri.github.io/bananacollector'>Banana Collector</a><br><a href='https://sonofharri.github.io/metronome78'>Metronome in 7/8</a><br><a href='https://sonofharri.github.io/SoftDrinkSkirmish'>Soft Drink Skirmish</a> <br><br>";
 
 			const closeButton = popup.appendChild(document.createElement("span"));
 			closeButton.className = "closebutton material-symbols-outlined";
@@ -525,16 +539,16 @@
 		}
 
 
-		function contactMe() {
+		function aboutMe() {
 			if (hasPopupOpen) return;
 			const popup = document.body.appendChild(document.createElement("div"));
-			popup.className = "popup popupsmall";
+			popup.className = "popup popupbig";
 
 			const popupHeader = popup.appendChild(document.createElement("h1"));
-			popupHeader.innerHTML = "Contact me!";
+			popupHeader.innerHTML = "About me";
 
 			const popupText = popup.appendChild(document.createElement("text"));
-			popupText.innerHTML = "Email: 69harrtozz@csdecatur.net";
+			popupText.innerHTML = "I'm Harrison Tozzi, a 14-year-old who likes to make cool things with technology. When I'm not programming, I like to play Minecraft, Apex Legends, and Counter-Strike. My favorite time of school is dismissal. I don't really have a <i>favorite</i> food, but I suppose I should have one, so I'll say Phó, since it's pretty good.<br><br><br><br><a href='https://docs.google.com/document/d/101i6bXcAZ42hWPv27tM6XEyqyjazXTzm6jIg0WZr5iE/edit?usp=sharing' target='_blank'>Resume</a><br><a href='https://docs.google.com/document/d/1lr0xS6baffHu7bD67P085AdmIxQ-gnNCzFT5YLC5fQc/edit?usp=sharing' target='_blank'>Cover letter</a><br><br><br><br><strong><u>Want to contact me?<strong></u><br><br>Email: 69harrtozz@csdecatur.net";
 
 			const closeButton = popup.appendChild(document.createElement("span"));
 			closeButton.className = "closebutton material-symbols-outlined";
@@ -555,9 +569,9 @@
 			<span class="material-symbols-outlined">deployed_code</span>
 			<h3>Projects</h3>
 		</div>
-		<div class="buttons rightbutton" onclick="contactMe();">
+		<div class="buttons rightbutton" onclick="aboutMe();">
 			<span class="material-symbols-outlined">call</span>
-			<h3>Contact me</h3>
+			<h3>About me</h3>
 		</div>
 	</div>
 	
